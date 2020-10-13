@@ -1,5 +1,5 @@
 import pickle
-from util import KNearstNeighborIndex, get_db_connection, LRMovieRanker
+from util import KNearestNeighborIndex, get_db_connection, LRMovieRanker
 import ray
 from ray import serve
 
@@ -10,13 +10,16 @@ class PlotRecommender:
 
         bert_vectors = self.db.execute(
             "SELECT id, plot_vector_json FROM movies")
-        self.index = KNearstNeighborIndex(bert_vectors)
+        self.index = KNearestNeighborIndex(bert_vectors)
 
         self.lr_model = LRMovieRanker(lr_model, features=self.index.id_to_arr)
 
     def __call__(self, request):
+        liked_id = request.args["liked_id"]
+        num_returns = int(request.args.get("count", 6))
+
         # Find k nearest movies with simliar plots.
-        recommended_movies = self.index.search(request)
+        recommended_movies = self.index.search(liked_id, num_returns)
 
         # Rank them using logistic regression.
         ranked_ids = self.lr_model.rank_movies(recommended_movies)

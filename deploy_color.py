@@ -1,7 +1,7 @@
 import ray
 from ray import serve
 
-from util import get_db_connection, KNearstNeighborIndex
+from util import get_db_connection, KNearestNeighborIndex
 
 
 class ColorRecommender:
@@ -10,11 +10,14 @@ class ColorRecommender:
 
         # Create index of cover image colors.
         colors = self.db.execute("SELECT id, palette_json FROM movies")
-        self.color_index = KNearstNeighborIndex(colors)
+        self.color_index = KNearestNeighborIndex(colors)
 
     def __call__(self, request):
+        liked_id = request.args["liked_id"]
+        num_returns = int(request.args.get("count", 6))
+
         # Perform KNN search for similar images.
-        recommended_ids = self.color_index.search(request)
+        recommended_ids = self.color_index.search(liked_id, num_returns)
 
         # Let's perform some post processing.
         titles_and_ids = self.db.execute(
