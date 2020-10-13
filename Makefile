@@ -1,2 +1,2 @@
 download-data:
-	wget https://ray-serve-blog.s3-us-west-2.amazonaws.com/composition-demo.sqlite3
+	wget https://rise-camp-ray-data.s3-us-west-2.amazonaws.com/tutorial.sqlite3

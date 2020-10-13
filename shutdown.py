@@ -1,7 +1,10 @@
 import ray
 from ray import serve
 
-ray.init(address="auto")
+try:
+    ray.init(address="auto")
+except:
+    pass
 
 # Shutdown Ray Serve
 try:

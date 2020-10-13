@@ -22,9 +22,6 @@ RUN pip install -U pip torch==1.4.0 torchvision==0.5.0 wandb google-api-python-c
 # Avoid surprises by pinning since we need to install from source
 RUN pip install -U git+git://github.com/huggingface/transformers.git@3a7fdd3f5214d1ec494379e7c65b4eb08146ddb0
 
-RUN mkdir -p /root/.aws
-COPY credentials /root/.aws
-
 RUN mkdir -p /root/tutorial
 
 # Copy workspace dir over

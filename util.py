@@ -21,14 +21,12 @@ with open("all-image-ids.json") as f:
 s3 = boto3.client('s3')
 
 def get_db_connection():
-    path = "./composition-demo.sqlite3"
+    path = "./tutorial.sqlite3"
     if not os.path.exists(path):
         raise Exception("""
 It seems like the database file doesn't exist. Did you forget
 to download it? You can try running
     make download-data
-or
-    wget https://ray-serve-blog.s3-us-west-2.amazonaws.com/composition-demo.sqlite3
     """)
 
     return connect(path)
