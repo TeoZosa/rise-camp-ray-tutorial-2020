@@ -1,5 +1,5 @@
-python shutdown.py
-python setup.py
-python deploy_color.py
-python deploy_plot.py
+#!/bin/bash
+
+bash run_1.sh
+bash run_2.sh
 python deploy_ensemble.py

@@ -5,8 +5,8 @@ from collections import defaultdict
 from itertools import cycle
 from sqlite3 import connect
 from tqdm import tqdm, trange
+import requests
 
-import boto3
 import numpy as np
 import pandas as pd
 import faiss
@@ -17,8 +17,6 @@ import ray
 with open("all-image-ids.json") as f:
     MOVIE_IDS = json.load(f)
 
-
-s3 = boto3.client('s3')
 
 def get_db_connection():
     path = "./tutorial.sqlite3"
@@ -150,8 +148,8 @@ class KNearestNeighborIndex:
 
 
 def load_image(image_id):
-    r = s3.get_object(Bucket="rise-camp-ray-data", Key=f"movie-cover-assets/{image_id}.jpg")
-    return io.BytesIO(r['Body'].read())
+    r = requests.get(f"https://rise-camp-ray-data.s3-us-west-2.amazonaws.com/movie-cover-assets/{image_id}.jpg", stream=True)
+    return io.BytesIO(r.content)
 
 def progress_bar(obj_refs):
     ready = []
