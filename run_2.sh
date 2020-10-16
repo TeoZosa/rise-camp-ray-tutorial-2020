@@ -1,6 +1,4 @@
 #!/bin/bash
 
-python shutdown.py
+ray stop
 python setup.py
-python deploy_color.py
-python deploy_plot.py

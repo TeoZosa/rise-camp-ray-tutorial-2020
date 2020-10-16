@@ -14,12 +14,15 @@ import faiss
 import ray
 #from ray.experimental.metrics import Gauge
 
-with open("all-image-ids.json") as f:
+ROOT_PATH = "/root/rise-camp-tutorial"
+if not os.path.exists(ROOT_PATH):
+    ROOT_PATH = "."
+with open(os.path.join(ROOT_PATH, "all-image-ids.json")) as f:
     MOVIE_IDS = json.load(f)
 
 
 def get_db_connection():
-    path = "./tutorial.sqlite3"
+    path = os.path.join(ROOT_PATH, "tutorial.sqlite3")
     if not os.path.exists(path):
         raise Exception("""
 It seems like the database file doesn't exist. Did you forget

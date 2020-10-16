@@ -1,5 +1,5 @@
 #FROM ubuntu:18.04
-FROM anyscale/ray:0.8.7-gpu
+FROM anyscale/ray:0.8.7
 
 RUN apt-get update && apt-get install -y vim htop curl unzip wget && apt-get clean
 
@@ -22,15 +22,7 @@ RUN pip install -U pip torch==1.4.0 torchvision==0.5.0 wandb google-api-python-c
 # Avoid surprises by pinning since we need to install from source
 RUN pip install -U git+git://github.com/huggingface/transformers.git@3a7fdd3f5214d1ec494379e7c65b4eb08146ddb0
 
-RUN mkdir -p /root/tutorial
+RUN mkdir -p /root/rise-camp-tutorial
 
 # Copy workspace dir over
-COPY . /root/tutorial
-#RUN rm -rf /root/demo/movie-cover-assets
-#
-# Install the ray-summit package
-#RUN cd /root/demo && pip install .
-#
-## Cached assets
-#RUN mkdir -p /data/movie-cover-assets
-#COPY movie-cover-assets /data/movie-cover-assets
+COPY . /root/rise-camp-tutorial
