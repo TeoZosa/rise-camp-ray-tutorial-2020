@@ -1,0 +1,5 @@
+ray==1.8
+pandas==1.3.4
+pyarrow==4.0.1
+tqdm
+jupyter
