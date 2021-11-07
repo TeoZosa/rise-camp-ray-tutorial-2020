@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "rise-camp-ray-tutorial-2020"
+version = "0.1.0"
+description = ""
+authors = ["Teo Zosa <erinzosa@ucla.edu>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pandas = "^1.3.4"
+pyarrow = "^6.0.0"
+tqdm = "^4.62.3"
+jupyter = "^1.0.0"
+ray = "^1.8.0"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
